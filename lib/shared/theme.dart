@@ -9,9 +9,11 @@ FontWeight bold = FontWeight.w700;
 
 Color blueColor = const Color(0xff31578E);
 Color greyColor = const Color(0xff808080);
+Color grey2Color = const Color(0xffBFCBDC);
 Color bgColor = const Color(0xffFFFFFF);
 Color blackColor = const Color(0xff000000);
 Color greenColor = const Color(0xff00A441);
+Color whiteColor = const Color(0xffEAEEF4);
 
 TextStyle blueTextStyle = GoogleFonts.inter(
   color: blueColor,
