@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:poggers/shared/theme.dart';
+import 'package:poggers/ui/pages/main_page.dart';
 import 'package:poggers/ui/pages/signup_page.dart';
 import 'package:poggers/ui/widgets/custom_button.dart';
 import 'package:poggers/ui/widgets/custom_teks_form.dart';
@@ -130,7 +131,14 @@ class LoginPage extends StatelessWidget {
                 ),
                 CustomButton(
                   title: 'Sign In',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MainPage(),
+                      ),
+                    );
+                  },
                 ),
                 signInButton(),
               ],

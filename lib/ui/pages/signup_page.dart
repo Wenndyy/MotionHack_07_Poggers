@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:poggers/ui/pages/login_page.dart';
 
 import '../../shared/theme.dart';
 import '../widgets/custom_button.dart';
@@ -14,6 +15,42 @@ class SignUpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget signInButton() {
+      return GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => LoginPage(),
+            ),
+          );
+        },
+        child: Container(
+          alignment: Alignment.center,
+          margin: const EdgeInsets.only(top: 40),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Already have account?",
+                style: blackTextStyle.copyWith(
+                  fontSize: 16,
+                  fontWeight: medium,
+                ),
+              ),
+              Text(
+                " Sign In",
+                style: blueTextStyle.copyWith(
+                  fontSize: 16,
+                  fontWeight: medium,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -96,6 +133,7 @@ class SignUpPage extends StatelessWidget {
                 CustomButton(
                   title: 'Sign Up',
                   onPressed: () {},
+                  
                 ),
                 const SizedBox(
                   height: 8,
@@ -131,6 +169,7 @@ class SignUpPage extends StatelessWidget {
                     ),
                   ],
                 ),
+                signInButton(),
                 SizedBox(
                   height: 50,
                 ),
