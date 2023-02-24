@@ -28,12 +28,15 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  carousel_slider: ^4.2.1
   cupertino_icons: ^1.0.2
   equatable: ^2.0.5
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.2
   google_fonts: ^4.0.3
+  readmore: ^2.2.0
+  sliding_up_panel: ^2.0.0+1
 
 dev_dependencies:
   flutter_lints: ^2.0.0

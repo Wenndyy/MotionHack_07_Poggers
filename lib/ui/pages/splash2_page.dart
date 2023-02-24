@@ -56,24 +56,22 @@ class Splash2Page extends StatelessWidget {
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                height: 257,
+                height: MediaQuery.of(context).size.width - 130,
                 width: 387,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/splash2.png'),
-                    fit: BoxFit.cover,
-                  ),
+                child: Image.asset(
+                  'assets/splash2.png',
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
             const SizedBox(
-              height: 40,
+              height: 20,
             ),
             Text(
               'Easier Connect\nYourself with Pro Players',
               style: whiteTextStyle.copyWith(
                 color: whiteColor,
-                fontSize: 31,
+                fontSize: 24,
                 fontWeight: bold,
               ),
               textAlign: TextAlign.center,

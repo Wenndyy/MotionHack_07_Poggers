@@ -25,7 +25,7 @@ class LoginPage extends StatelessWidget {
         },
         child: Container(
           alignment: Alignment.center,
-          margin: const EdgeInsets.only(top: 200),
+          margin: const EdgeInsets.only(top: 100),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -89,21 +89,21 @@ class LoginPage extends StatelessWidget {
                       'Become a ',
                       style: blackTextStyle.copyWith(
                         fontWeight: regular,
-                        fontSize: 20,
+                        fontSize: 19,
                       ),
                     ),
                     Text(
                       'professional player ',
                       style: blueTextStyle.copyWith(
                         fontWeight: regular,
-                        fontSize: 20,
+                        fontSize: 19,
                       ),
                     ),
                     Text(
-                      'with ',
+                      'with',
                       style: blackTextStyle.copyWith(
                         fontWeight: regular,
-                        fontSize: 20,
+                        fontSize: 19,
                       ),
                     ),
                   ],
@@ -112,7 +112,7 @@ class LoginPage extends StatelessWidget {
                   'poggers',
                   style: blueTextStyle.copyWith(
                     fontWeight: regular,
-                    fontSize: 20,
+                    fontSize: 19,
                   ),
                 ),
                 const SizedBox(
