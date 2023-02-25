@@ -33,6 +33,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  bottom_sheet_scaffold:
+    dependency: "direct main"
+    description:
+      name: bottom_sheet_scaffold
+      sha256: d34341831cf9ec8d42f28ca094a0362d7914f83e580d50405f340d24a1a37c9e
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.6"
   carousel_slider:
     dependency: "direct main"
     description:

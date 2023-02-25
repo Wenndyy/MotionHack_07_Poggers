@@ -35,7 +35,7 @@ class _MainPageState extends State<MainPage> {
           break;
 
         default:
-          return const MainPage();
+          return const HomePage();
       }
     }
 

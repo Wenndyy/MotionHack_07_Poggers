@@ -2,6 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:poggers/shared/theme.dart';
 
+import '../pages/turnament_page.dart';
+
 class CarouselCard extends StatefulWidget {
   const CarouselCard({super.key});
 
@@ -29,6 +31,8 @@ class _CarouselCardState extends State<CarouselCard> {
           InkWell(
             onTap: () {
               print(currentIndex);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => TurnamentPage()));
             },
             child: CarouselSlider(
               items: imageList

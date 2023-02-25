@@ -1,8 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:poggers/ui/widgets/card_popular_course_byplayer.dart';
 import 'package:poggers/ui/widgets/custom_button.dart';
 import 'package:poggers/ui/widgets/expanded_text.dart';
-
 
 import '../../shared/theme.dart';
 
@@ -131,7 +132,304 @@ class _ProfessionalPageState extends State<ProfessionalPage> {
                 const Spacer(),
                 CustomButton(
                   title: 'Pay Now',
-                  onPressed: () {},
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      builder: (context) => Container(
+                          height: MediaQuery.of(context).size.height * 0.75,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                right: 19, left: 19, top: 25),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      width: 54,
+                                      height: 54,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image:
+                                              AssetImage('assets/player1.png'),
+                                        ),
+                                        borderRadius: BorderRadius.circular(50),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 8,
+                                    ),
+                                    Text(
+                                      'Evos Oura',
+                                      style: blackTextStyle.copyWith(
+                                        fontSize: 16,
+                                        fontWeight: semiBold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 11,
+                                ),
+                                Container(
+                                  height: 2,
+                                  width: double.infinity,
+                                  color: grey2Color,
+                                ),
+                                const SizedBox(
+                                  height: 24,
+                                ),
+                                Text(
+                                  'Q&A Gameplay Performance',
+                                  style: blueTextStyle.copyWith(
+                                    fontSize: 13,
+                                    fontWeight: bold,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  'Gameplay is a term used to define how players interact with a Video game. It is further characterized as the way the game is played, including the rules, plot, objectives and how to conquer them, as well as the overall experience of the player.',
+                                  style: greyTextStyle.copyWith(
+                                    fontSize: 13,
+                                    fontWeight: regular,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.date_range_rounded,
+                                      size: 15,
+                                      color: blueColor,
+                                    ),
+                                    const SizedBox(
+                                      width: 8,
+                                    ),
+                                    Text(
+                                      'Sunday, 30 January 2023',
+                                      style: greyTextStyle.copyWith(
+                                        fontSize: 13,
+                                        fontWeight: regular,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.access_time_filled_rounded,
+                                      size: 15,
+                                      color: blueColor,
+                                    ),
+                                    const SizedBox(
+                                      width: 8,
+                                    ),
+                                    Text(
+                                      '15:30 - 16:30',
+                                      style: greyTextStyle.copyWith(
+                                        fontSize: 13,
+                                        fontWeight: regular,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 24,
+                                ),
+                                Container(
+                                  height: 2,
+                                  width: double.infinity,
+                                  color: grey2Color,
+                                ),
+                                const SizedBox(
+                                  height: 24,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Subtotal',
+                                            style: blueTextStyle.copyWith(
+                                              fontSize: 12,
+                                              fontWeight: medium,
+                                            ),
+                                          ),
+                                          Text(
+                                            '\$ 5',
+                                            style: greyTextStyle.copyWith(
+                                              fontSize: 12,
+                                              fontWeight: medium,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Admin Fee',
+                                            style: blueTextStyle.copyWith(
+                                              fontSize: 12,
+                                              fontWeight: medium,
+                                            ),
+                                          ),
+                                          Text(
+                                            '\$ 0.50',
+                                            style: greyTextStyle.copyWith(
+                                              fontSize: 12,
+                                              fontWeight: medium,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Other',
+                                            style: blueTextStyle.copyWith(
+                                              fontSize: 12,
+                                              fontWeight: medium,
+                                            ),
+                                          ),
+                                          Text(
+                                            '\$ 0.25',
+                                            style: greyTextStyle.copyWith(
+                                              fontSize: 12,
+                                              fontWeight: medium,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Total',
+                                            style: blueTextStyle.copyWith(
+                                              fontSize: 12,
+                                              fontWeight: medium,
+                                            ),
+                                          ),
+                                          Text(
+                                            '\$ 5.75',
+                                            style: blueTextStyle.copyWith(
+                                              fontSize: 12,
+                                              fontWeight: bold,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: blueColor,
+                                            fixedSize: Size(150, 35.66)),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text('Cancel')),
+                                    OutlinedButton(
+                                      style: OutlinedButton.styleFrom(
+                                          fixedSize: Size(150, 35.66)),
+                                      onPressed: () {
+                                        Timer(
+                                          Duration(
+                                            seconds: 3,
+                                          ),
+                                          () {
+                                            showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                  title: Column(
+                                                    children: [
+                                                      Image.asset(
+                                                        'assets/success1.png',
+                                                        height: 40,
+                                                        width: 40,
+                                                      ),
+                                                      Text(
+                                                        "Success",
+                                                        style: blueTextStyle
+                                                            .copyWith(
+                                                          fontWeight: semiBold,
+                                                          fontSize: 20,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  content: Text(
+                                                    "Thank you for buying this product, check the orde section in the profile",
+                                                    style:
+                                                        blackTextStyle.copyWith(
+                                                      fontSize: 16,
+                                                      fontWeight: semiBold,
+                                                    ),
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          },
+                                        );
+                                      },
+                                      child: Text(
+                                        'Pay',
+                                        style: blueTextStyle.copyWith(
+                                          fontSize: 16,
+                                          fontWeight: semiBold,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )),
+                    );
+                 
+                  },
                   width: 83,
                   height: 32,
                   size: 14,
@@ -411,15 +709,15 @@ class _ProfessionalPageState extends State<ProfessionalPage> {
                             fontWeight: semiBold,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 24,
                         ),
-                        CardPopularCourseByPlayer(
+                        const CardPopularCourseByPlayer(
                           imgCourse: 'assets/course1.png',
                           title: 'Laning Phase',
                           price: 50,
                         ),
-                        CardPopularCourseByPlayer(
+                        const CardPopularCourseByPlayer(
                           imgCourse: 'assets/course1.png',
                           title: 'Laning Phase',
                           price: 50,

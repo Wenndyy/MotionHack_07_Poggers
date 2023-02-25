@@ -85,43 +85,43 @@ class GamePage extends StatelessWidget {
                     child: Column(
                       children: [
                         Row(
-                          children: [
+                          children: const [
                             CustomCardGame(
                               title: "MLBB",
                               imgUrl: 'assets/mlbb.png',
                               download: '281.3 Million Downloads',
                             ),
                             CustomCardGame(
-                              title: "MLBB",
-                              imgUrl: 'assets/mlbb.png',
-                              download: '281.3 Million Downloads',
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            CustomCardGame(
-                              title: "MLBB",
-                              imgUrl: 'assets/mlbb.png',
-                              download: '281.3 Million Downloads',
-                            ),
-                            CustomCardGame(
-                              title: "MLBB",
-                              imgUrl: 'assets/mlbb.png',
+                              title: "PUBG",
+                              imgUrl: 'assets/game1.png',
                               download: '281.3 Million Downloads',
                             ),
                           ],
                         ),
                         Row(
-                          children: [
+                          children: const [
                             CustomCardGame(
-                              title: "MLBB",
-                              imgUrl: 'assets/mlbb.png',
+                              title: "APEX",
+                              imgUrl: 'assets/game2.png',
                               download: '281.3 Million Downloads',
                             ),
                             CustomCardGame(
-                              title: "MLBB",
-                              imgUrl: 'assets/mlbb.png',
+                              title: "Modern WII",
+                              imgUrl: 'assets/game3.png',
+                              download: '281.3 Million Downloads',
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: const [
+                            CustomCardGame(
+                              title: "Valorant",
+                              imgUrl: 'assets/game4.png',
+                              download: '281.3 Million Downloads',
+                            ),
+                            CustomCardGame(
+                              title: "Dota 2",
+                              imgUrl: 'assets/game5.png',
                               download: '281.3 Million Downloads',
                             ),
                           ],

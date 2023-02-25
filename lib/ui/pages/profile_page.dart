@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poggers/cubit/auth_cubit.dart';
 import 'package:poggers/shared/theme.dart';
+import 'package:poggers/ui/pages/order_page.dart';
 
 import '../../cubit/page_cubit.dart';
 
@@ -251,37 +252,45 @@ class ProfilePage extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          Container(
-                            width: 350,
-                            height: 40,
-                            padding: const EdgeInsets.only(
-                              top: 5,
-                              bottom: 5,
-                              right: 16,
-                              left: 16,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: bgColor,
-                            ),
-                            child: Row(
-                              children: [
-                                Image.asset('assets/order.png'),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                Text(
-                                  'Order',
-                                  style: blueTextStyle.copyWith(
-                                    fontSize: 16,
-                                    fontWeight: medium,
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => OrderPage()));
+                            },
+                            child: Container(
+                              width: 350,
+                              height: 40,
+                              padding: const EdgeInsets.only(
+                                top: 5,
+                                bottom: 5,
+                                right: 16,
+                                left: 16,
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: bgColor,
+                              ),
+                              child: Row(
+                                children: [
+                                  Image.asset('assets/order.png'),
+                                  const SizedBox(
+                                    width: 8,
                                   ),
-                                ),
-                                const Spacer(),
-                                const Icon(
-                                  Icons.navigate_next_rounded,
-                                ),
-                              ],
+                                  Text(
+                                    'Order',
+                                    style: blueTextStyle.copyWith(
+                                      fontSize: 16,
+                                      fontWeight: medium,
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  const Icon(
+                                    Icons.navigate_next_rounded,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           const SizedBox(
@@ -333,7 +342,7 @@ class ProfilePage extends StatelessWidget {
                                   ),
                                 );
                               } else if (state is AuthInitial) {
-                                context.read<PageCubit>().setPage(1);
+                                context.read<PageCubit>().setPage(0);
                                 Navigator.pushNamedAndRemoveUntil(
                                     context, '/sign-in', (route) => false);
                               }
