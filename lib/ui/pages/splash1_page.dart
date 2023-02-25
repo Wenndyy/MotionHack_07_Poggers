@@ -1,11 +1,37 @@
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poggers/shared/theme.dart';
 import 'package:poggers/ui/pages/login_page.dart';
 import 'package:poggers/ui/pages/splash2_page.dart';
 import 'package:poggers/ui/widgets/custom_button.dart';
 
-class Splash1Page extends StatelessWidget {
+import '../../cubit/auth_cubit.dart';
+
+class Splash1Page extends StatefulWidget {
   const Splash1Page({super.key});
+
+  @override
+  State<Splash1Page> createState() => _Splash1PageState();
+}
+
+class _Splash1PageState extends State<Splash1Page> {
+  @override
+  void initState() {
+    Timer(const Duration(seconds: 3), () {
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user == null) {
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/get-started', (route) => false);
+      } else {
+        context.read<AuthCubit>().getCurrentUser(user.uid);
+        Navigator.pushNamedAndRemoveUntil(context, '/main', (route) => false);
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

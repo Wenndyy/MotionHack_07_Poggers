@@ -1,16 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:poggers/cubit/auth_cubit.dart';
 import 'package:poggers/ui/pages/login_page.dart';
 
 import '../../shared/theme.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_teks_form.dart';
 
-class SignUpPage extends StatelessWidget {
-  SignUpPage({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
+
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  @override
+  void initState() {
+    super.initState();
+    passwordController.addListener(() {
+      setState(() {});
+    });
+  }
+
   final TextEditingController emailController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
+
   final TextEditingController retypepasswordController =
       TextEditingController();
+
   final TextEditingController usernameController = TextEditingController();
 
   @override
@@ -114,26 +133,82 @@ class SignUpPage extends StatelessWidget {
                     const Spacer(),
                     Icon(
                       Icons.check_circle,
-                      color: greyColor,
+                      color: (passwordController.text.length > 9)
+                          ? greenColor
+                          : greyColor,
                     ),
                   ],
                 ),
                 const SizedBox(
                   height: 24,
                 ),
-                CustomTeksForm(
-                  title: 'Re-type Password',
-                  hintText: 'Re-type Password',
+                TextFormField(
                   obscureText: true,
+                  validator: (val) {
+                    if (val == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: blueColor,
+                          content: Text('Empty'),
+                        ),
+                      );
+                    }
+                    if (val != passwordController.text) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: blueColor,
+                          content: Text('No match'),
+                        ),
+                      );
+                    }
+                    return null;
+                  },
                   controller: retypepasswordController,
+                  decoration: InputDecoration(
+                    hintText: 'Retype password',
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(color: blueColor),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(color: blueColor),
+                    ),
+                  ),
                 ),
                 const SizedBox(
-                  height: 8,
+                  height: 24,
                 ),
-                CustomButton(
-                  title: 'Sign Up',
-                  onPressed: () {},
-                  
+                BlocConsumer<AuthCubit, AuthState>(
+                  listener: (context, state) {
+                    if (state is AuthSuccess) {
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, '/main', (route) => false);
+                    } else if (state is AuthFailed) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: blueColor,
+                          content: Text(state.error),
+                        ),
+                      );
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state is AuthLoading) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    return CustomButton(
+                      title: 'Sign Up',
+                      onPressed: () {
+                        context.read<AuthCubit>().signUp(
+                            email: emailController.text,
+                            password: passwordController.text,
+                            username: usernameController.text);
+                      },
+                    );
+                  },
                 ),
                 const SizedBox(
                   height: 8,
@@ -170,7 +245,7 @@ class SignUpPage extends StatelessWidget {
                   ],
                 ),
                 signInButton(),
-                SizedBox(
+                const SizedBox(
                   height: 50,
                 ),
               ],

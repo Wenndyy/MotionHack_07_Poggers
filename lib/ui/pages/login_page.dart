@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:poggers/cubit/auth_cubit.dart';
 import 'package:poggers/shared/theme.dart';
 import 'package:poggers/ui/pages/main_page.dart';
 import 'package:poggers/ui/pages/signup_page.dart';
@@ -16,12 +18,7 @@ class LoginPage extends StatelessWidget {
     Widget signInButton() {
       return GestureDetector(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => SignUpPage(),
-            ),
-          );
+          Navigator.pushNamed(context, '/sign-up');
         },
         child: Container(
           alignment: Alignment.center,
@@ -129,14 +126,34 @@ class LoginPage extends StatelessWidget {
                   obscureText: true,
                   controller: passwordController,
                 ),
-                CustomButton(
-                  title: 'Sign In',
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const MainPage(),
-                      ),
+                BlocConsumer<AuthCubit, AuthState>(
+                  listener: (context, state) {
+                    if (state is AuthSuccess) {
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, '/main', (route) => false);
+                    } else if (state is AuthFailed) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: blueColor,
+                          content: Text(state.error),
+                        ),
+                      );
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state is AuthLoading) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    return CustomButton(
+                      title: 'Sign In',
+                      onPressed: () {
+                        context.read<AuthCubit>().signIn(
+                              email: emailController.text,
+                              password: passwordController.text,
+                            );
+                      },
                     );
                   },
                 ),

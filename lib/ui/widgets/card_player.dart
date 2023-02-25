@@ -1,18 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:poggers/models/profesional_model.dart';
 
 import 'package:poggers/shared/theme.dart';
 import 'package:poggers/ui/pages/professional_page.dart';
 
 class CardPlayer extends StatelessWidget {
-  final String imgUrl;
-  final String title;
-  final String category;
-  const CardPlayer({
+  final ProfesionalModel pro;
+
+  const CardPlayer(
+    this.pro, {
     Key? key,
-    required this.imgUrl,
-    required this.title,
-    required this.category,
   }) : super(key: key);
 
   @override
@@ -22,24 +20,24 @@ class CardPlayer extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ProfessionalPage(),
+            builder: (context) => const ProfessionalPage(),
           ),
         );
       },
       child: Container(
         width: 160,
         height: 90,
-        padding: EdgeInsets.symmetric(
-          horizontal: 16,
+        padding: const EdgeInsets.symmetric(
+          horizontal: 6,
         ),
-        margin: EdgeInsets.only(
+        margin: const EdgeInsets.only(
           right: 10,
           left: 5,
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: bgColor,
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Colors.grey,
               offset: Offset(0.0, .9), //(x,y)
@@ -56,28 +54,29 @@ class CardPlayer extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
                 image: DecorationImage(
-                  image: AssetImage(
-                    imgUrl,
+                  image: NetworkImage(
+                    pro.imageProfile,
                   ),
                   fit: BoxFit.cover,
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 8,
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  title,
+                  pro.name,
                   style: blackTextStyle.copyWith(
                     fontSize: 16,
                     fontWeight: medium,
                   ),
                 ),
                 Text(
-                  category,
+                  pro.nameCategory,
                   style: blackTextStyle.copyWith(
                     fontSize: 13,
                     fontWeight: medium,

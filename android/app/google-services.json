@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1037725980915",
+    "project_id": "poggersapp-89500",
+    "storage_bucket": "poggersapp-89500.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1037725980915:android:ffa0272dcc980e8c47bf86",
+        "android_client_info": {
+          "package_name": "com.example.poggers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1037725980915-pk00eck2k71lq42g79gguhm57vog3crk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBolO0J8GCxCNIWGI1mtskcygsZwJOpeIY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1037725980915-pk00eck2k71lq42g79gguhm57vog3crk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

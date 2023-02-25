@@ -1,10 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:poggers/shared/theme.dart';
 
 class CarouselCard extends StatefulWidget {
-  List<String> imgList;
+  const CarouselCard({super.key});
 
-  CarouselCard({required this.imgList});
   @override
   State<StatefulWidget> createState() {
     return _CarouselCardState();
@@ -12,82 +12,73 @@ class CarouselCard extends StatefulWidget {
 }
 
 class _CarouselCardState extends State<CarouselCard> {
-  int _current = 0;
-  final CarouselController _controller = CarouselController();
+  final List imageList = [
+    {"id": 1, "image_path": 'assets/banner1.png'},
+    {"id": 2, "image_path": 'assets/banner1.png'},
+    {"id": 3, "image_path": 'assets/banner1.png'}
+  ];
+  int currentIndex = 0;
+  final CarouselController carouselController = CarouselController();
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> imageSliders = widget.imgList
-        .map((item) => ClipRRect(
-              borderRadius: const BorderRadius.all(
-                Radius.circular(5.0),
-              ),
-              child: Stack(
-                children: [
-                  Image.network(
-                    item,
-                    fit: BoxFit.cover,
-                    width: 450,
-                  ),
-                  Positioned(
-                    bottom: 0.0,
-                    left: 0.0,
-                    right: 0.0,
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            Color.fromARGB(200, 0, 0, 0),
-                            Color.fromARGB(0, 0, 0, 0),
-                          ],
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
-                        ),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 10,
-                      ),
+    return Container(
+      height: 204,
+      child: Stack(
+        children: [
+          InkWell(
+            onTap: () {
+              print(currentIndex);
+            },
+            child: CarouselSlider(
+              items: imageList
+                  .map(
+                    (item) => Image.asset(
+                      item['image_path'],
+                      fit: BoxFit.cover,
+                      width: double.infinity,
                     ),
+                  )
+                  .toList(),
+              carouselController: carouselController,
+              options: CarouselOptions(
+                scrollPhysics: const BouncingScrollPhysics(),
+                aspectRatio: 2,
+                viewportFraction: 1,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    currentIndex = index;
+                  });
+                },
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 20,
+            left: 0,
+            right: 0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: imageList.asMap().entries.map((entry) {
+                return GestureDetector(
+                  onTap: () => carouselController.animateToPage(entry.key),
+                  child: Container(
+                    width: currentIndex == entry.key ? 17 : 7,
+                    height: 7.0,
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 3.0,
+                    ),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color:
+                            currentIndex == entry.key ? greyColor : grey2Color),
                   ),
-                ],
-              ),
-            ))
-        .toList();
-    return Column(
-      children: [
-        CarouselSlider(
-          items: imageSliders,
-          options: CarouselOptions(
-              enlargeCenterPage: true,
-              aspectRatio: 2.0,
-              onPageChanged: (index, reason) {
-                setState(() {
-                  _current = index;
-                });
-              }),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: widget.imgList.map((url) {
-            int index = widget.imgList.indexOf(url);
-            return Container(
-              width: 10,
-              height: 10,
-              margin: const EdgeInsets.symmetric(
-                vertical: 10,
-                horizontal: 3,
-              ),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: _current == index
-                    ? const Color.fromRGBO(0, 0, 0, 0.9)
-                    : const Color.fromRGBO(0, 0, 0, 0.4),
-              ),
-            );
-          }).toList(),
-        )
-      ],
+                );
+              }).toList(),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

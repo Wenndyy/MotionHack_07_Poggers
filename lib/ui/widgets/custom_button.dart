@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import 'package:poggers/shared/theme.dart';
 
 class CustomButton extends StatelessWidget {
@@ -8,6 +9,8 @@ class CustomButton extends StatelessWidget {
   final Function() onPressed;
   final EdgeInsets margin;
   final double radius;
+  final double height;
+  final double size;
 
   const CustomButton({
     Key? key,
@@ -16,6 +19,8 @@ class CustomButton extends StatelessWidget {
     required this.onPressed,
     this.margin = EdgeInsets.zero,
     this.radius = 8,
+    this.height = 40,
+    this.size = 16,
   }) : super(key: key);
 
   @override
@@ -23,7 +28,8 @@ class CustomButton extends StatelessWidget {
     return Container(
       margin: margin,
       width: width,
-      height: 40,
+      height: height,
+      padding: margin,
       child: TextButton(
         style: TextButton.styleFrom(
           backgroundColor: blueColor,
@@ -35,7 +41,7 @@ class CustomButton extends StatelessWidget {
         child: Text(
           title,
           style: whiteTextStyle.copyWith(
-            fontSize: 16,
+            fontSize: size,
             fontWeight: semiBold,
           ),
         ),

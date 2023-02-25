@@ -1,23 +1,42 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poggers/shared/theme.dart';
 import 'package:poggers/ui/widgets/card_live.dart';
 import 'package:poggers/ui/widgets/card_player.dart';
 import 'package:poggers/ui/widgets/card_popular_course.dart';
 import 'package:poggers/ui/widgets/slider_card.dart';
 
-final List<String> imgList = [
-  'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-  'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-  'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-];
+import '../../cubit/profesional_cubit.dart';
+import '../../models/profesional_model.dart';
 
-class DetailGamePage extends StatelessWidget {
+class DetailGamePage extends StatefulWidget {
   const DetailGamePage({super.key});
 
   @override
+  State<DetailGamePage> createState() => _DetailGamePageState();
+}
+
+class _DetailGamePageState extends State<DetailGamePage> {
+  @override
+  void initState() {
+    context.read<ProfesionalCubit>().fetchData();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    Widget profesionalCard(List<ProfesionalModel> pro) {
+      return Row(
+        children: pro.map(
+          (ProfesionalModel pro) {
+            return CardPlayer(pro);
+          },
+        ).toList(),
+      );
+    }
+
     return Scaffold(
       backgroundColor: blueColor,
       body: ListView(
@@ -45,7 +64,7 @@ class DetailGamePage extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                     right: 21,
                     left: 21,
                     top: 50,
@@ -65,14 +84,14 @@ class DetailGamePage extends StatelessWidget {
                               color: bgColor,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 78,
                           ),
                           Container(
                             width: 112,
                             height: 88,
                             decoration: BoxDecoration(
-                              image: DecorationImage(
+                              image: const DecorationImage(
                                 image: AssetImage('assets/bg_ml.png'),
                                 fit: BoxFit.cover,
                               ),
@@ -81,7 +100,7 @@ class DetailGamePage extends StatelessWidget {
                           )
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 12,
                       ),
                       Text(
@@ -91,7 +110,7 @@ class DetailGamePage extends StatelessWidget {
                           fontWeight: semiBold,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Text(
@@ -107,15 +126,15 @@ class DetailGamePage extends StatelessWidget {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
-                    margin: EdgeInsets.only(top: 220),
+                    margin: const EdgeInsets.only(top: 220),
                     height: MediaQuery.of(context).size.height * 2.5,
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                       right: 20,
                       left: 20,
                       top: 31,
                     ),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(20),
                         topRight: Radius.circular(20),
                       ),
@@ -131,11 +150,11 @@ class DetailGamePage extends StatelessWidget {
                             fontWeight: semiBold,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 13,
                         ),
-                        CarouselCard(imgList: imgList),
-                        SizedBox(
+                        const CarouselCard(),
+                        const SizedBox(
                           height: 16,
                         ),
                         Container(
@@ -143,7 +162,7 @@ class DetailGamePage extends StatelessWidget {
                           width: double.infinity,
                           color: grey2Color,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Text(
@@ -153,31 +172,44 @@ class DetailGamePage extends StatelessWidget {
                             fontWeight: semiBold,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 14,
                         ),
                         SizedBox(
                           height: 100,
-                          width: double.infinity,
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: const [
-                                CardPlayer(
-                                  imgUrl: 'assets/player1.png',
-                                  title: 'Oura',
-                                  category: 'MLBB',
-                                ),
-                                CardPlayer(
-                                  imgUrl: 'assets/player2.png',
-                                  title: 'RRQ R7',
-                                  category: 'MLBB',
-                                ),
-                              ],
-                            ),
+                          width: MediaQuery.of(context).size.width,
+                          child:
+                              BlocConsumer<ProfesionalCubit, ProfesionalState>(
+                            listener: (context, state) {
+                              if (state is ProfesionalFailed) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    backgroundColor: blackColor,
+                                    content: Text(state.error),
+                                  ),
+                                );
+                              }
+                            },
+                            builder: (context, state) {
+                              if (state is ProfesionalSuccess) {
+                                return ListView(
+                                  scrollDirection: Axis.horizontal,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        profesionalCard(state.profesional),
+                                      ],
+                                    ),
+                                  ],
+                                );
+                              }
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            },
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 14,
                         ),
                         Container(
@@ -187,7 +219,7 @@ class DetailGamePage extends StatelessWidget {
                         ),
 
                         // Live Streams
-                        SizedBox(
+                        const SizedBox(
                           height: 14,
                         ),
                         Text(
@@ -225,7 +257,7 @@ class DetailGamePage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 14,
                         ),
                         Container(
@@ -235,7 +267,7 @@ class DetailGamePage extends StatelessWidget {
                         ),
 
                         // Popular Course
-                        SizedBox(
+                        const SizedBox(
                           height: 14,
                         ),
                         Text(
@@ -248,11 +280,11 @@ class DetailGamePage extends StatelessWidget {
                         const SizedBox(
                           height: 21,
                         ),
-                        CardPopularCourse(),
-                        CardPopularCourse(),
-                        CardPopularCourse(),
-                        CardPopularCourse(),
-                        CardPopularCourse(),
+                        const CardPopularCourse(),
+                        const CardPopularCourse(),
+                        const CardPopularCourse(),
+                        const CardPopularCourse(),
+                        const CardPopularCourse(),
                       ],
                     ),
                   ),

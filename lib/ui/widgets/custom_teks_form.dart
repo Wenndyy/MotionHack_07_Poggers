@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import 'package:poggers/shared/theme.dart';
 
 class CustomTeksForm extends StatelessWidget {
@@ -7,6 +8,7 @@ class CustomTeksForm extends StatelessWidget {
   final String hintText;
   final bool obscureText;
   final TextEditingController controller;
+  
 
   const CustomTeksForm({
     Key? key,
@@ -14,6 +16,7 @@ class CustomTeksForm extends StatelessWidget {
     required this.hintText,
     this.obscureText = false,
     required this.controller,
+    
   }) : super(key: key);
 
   @override
@@ -34,6 +37,7 @@ class CustomTeksForm extends StatelessWidget {
         TextFormField(
           obscureText: obscureText,
           controller: controller,
+        
           decoration: InputDecoration(
             hintText: hintText,
             enabledBorder: OutlineInputBorder(

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:poggers/cubit/auth_cubit.dart';
 import 'package:poggers/shared/theme.dart';
+
+import '../../cubit/page_cubit.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -8,319 +12,391 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Container(
-          width: double.infinity,
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color(0xff5A78A3),
-                Color(0xff15253C),
-              ],
-              end: Alignment.bottomCenter,
-              begin: Alignment.topCenter,
-            ),
-          ),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 50,
-              ),
-              Text(
-                "My Profile",
-                style: whiteTextStyle.copyWith(
-                  fontSize: 25,
-                  fontWeight: semiBold,
-                ),
-              ),
-              const SizedBox(
-                height: 53,
-              ),
-              Container(
-                height: 128,
-                width: 128,
+        child: BlocBuilder<AuthCubit, AuthState>(
+          builder: (context, state) {
+            if (state is AuthSuccess) {
+              return Container(
+                width: double.infinity,
                 decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/img-profile.png'),
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xff5A78A3),
+                      Color(0xff15253C),
+                    ],
+                    end: Alignment.bottomCenter,
+                    begin: Alignment.topCenter,
                   ),
-                ),
-                child: Align(
-                  alignment: Alignment(0.6, 0.8),
-                  child: Container(
-                    height: 30,
-                    width: 30,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/ic_edit.png'),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 22,
-              ),
-              Text(
-                'Adam Melvin',
-                style: whiteTextStyle.copyWith(
-                  fontSize: 20,
-                  fontWeight: bold,
-                ),
-              ),
-              const SizedBox(
-                height: 43,
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(
-                  horizontal: 20,
                 ),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      width: 350,
-                      height: 40,
-                      padding: const EdgeInsets.only(
-                        top: 5,
-                        bottom: 5,
-                        right: 16,
-                        left: 16,
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: bgColor,
-                      ),
-                      child: Row(
-                        children: [
-                          Image.asset('assets/ic_balance.png'),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          Text(
-                            'Your Balance',
-                            style: blueTextStyle.copyWith(
-                              fontSize: 16,
-                              fontWeight: medium,
-                            ),
-                          ),
-                          const Spacer(),
-                          Text(
-                            '\$350 USD',
-                            style: blueTextStyle.copyWith(
-                              fontSize: 16,
-                              fontWeight: medium,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                     const SizedBox(
-                      height: 21,
+                      height: 50,
                     ),
                     Text(
-                      "Account",
+                      "My Profile",
                       style: whiteTextStyle.copyWith(
-                        fontSize: 16,
+                        fontSize: 25,
                         fontWeight: semiBold,
                       ),
                     ),
                     const SizedBox(
-                      height: 10,
+                      height: 53,
                     ),
                     Container(
-                      width: 350,
-                      height: 40,
-                      padding: const EdgeInsets.only(
-                        top: 5,
-                        bottom: 5,
-                        right: 16,
-                        left: 16,
+                      height: 128,
+                      width: 128,
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/img-profile.png'),
+                        ),
                       ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: bgColor,
-                      ),
-                      child: Row(
-                        children: [
-                          Image.asset('assets/ic_profile.png'),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          Text(
-                            'Adam Melvin',
-                            style: blueTextStyle.copyWith(
-                              fontSize: 16,
-                              fontWeight: medium,
+                      child: Align(
+                        alignment: const Alignment(0.6, 0.8),
+                        child: Container(
+                          height: 30,
+                          width: 30,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage('assets/ic_edit.png'),
                             ),
                           ),
-                          const Spacer(),
-                          const Icon(
-                            Icons.navigate_next_rounded,
-                          ),
-                        ],
+                        ),
                       ),
                     ),
                     const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      width: 350,
-                      height: 40,
-                      padding: const EdgeInsets.only(
-                        top: 5,
-                        bottom: 5,
-                        right: 16,
-                        left: 16,
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: bgColor,
-                      ),
-                      child: Row(
-                        children: [
-                          Image.asset('assets/ic_email.png'),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          Text(
-                            'Adams@gmail.com',
-                            style: blueTextStyle.copyWith(
-                              fontSize: 16,
-                              fontWeight: medium,
-                            ),
-                          ),
-                          const Spacer(),
-                          const Icon(
-                            Icons.navigate_next_rounded,
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      width: 350,
-                      height: 40,
-                      padding: const EdgeInsets.only(
-                        top: 5,
-                        bottom: 5,
-                        right: 16,
-                        left: 16,
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: bgColor,
-                      ),
-                      child: Row(
-                        children: [
-                          Image.asset('assets/ic_lock.png'),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          Text(
-                            'Change Password',
-                            style: blueTextStyle.copyWith(
-                              fontSize: 16,
-                              fontWeight: medium,
-                            ),
-                          ),
-                          const Spacer(),
-                          const Icon(
-                            Icons.navigate_next_rounded,
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 21,
+                      height: 22,
                     ),
                     Text(
-                      "Other",
+                      state.user.username,
                       style: whiteTextStyle.copyWith(
-                        fontSize: 16,
-                        fontWeight: semiBold,
+                        fontSize: 20,
+                        fontWeight: bold,
                       ),
                     ),
                     const SizedBox(
-                      height: 10,
+                      height: 43,
                     ),
                     Container(
-                      width: 350,
-                      height: 40,
-                      padding: const EdgeInsets.only(
-                        top: 5,
-                        bottom: 5,
-                        right: 16,
-                        left: 16,
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 20,
                       ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: bgColor,
-                      ),
-                      child: Row(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Image.asset('assets/ic_help.png'),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          Text(
-                            'Help',
-                            style: blueTextStyle.copyWith(
-                              fontSize: 16,
-                              fontWeight: medium,
+                          Container(
+                            width: 350,
+                            height: 40,
+                            padding: const EdgeInsets.only(
+                              top: 5,
+                              bottom: 5,
+                              right: 16,
+                              left: 16,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: bgColor,
+                            ),
+                            child: Row(
+                              children: [
+                                Image.asset('assets/ic_balance.png'),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  'Your Balance',
+                                  style: blueTextStyle.copyWith(
+                                    fontSize: 16,
+                                    fontWeight: medium,
+                                  ),
+                                ),
+                                const Spacer(),
+                                Text(
+                                  '${state.user.saldo} USD',
+                                  style: blueTextStyle.copyWith(
+                                    fontSize: 16,
+                                    fontWeight: medium,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          const Spacer(),
-                          const Icon(
-                            Icons.navigate_next_rounded,
+                          const SizedBox(
+                            height: 21,
+                          ),
+                          Text(
+                            "Account",
+                            style: whiteTextStyle.copyWith(
+                              fontSize: 16,
+                              fontWeight: semiBold,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            width: 350,
+                            height: 40,
+                            padding: const EdgeInsets.only(
+                              top: 5,
+                              bottom: 5,
+                              right: 16,
+                              left: 16,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: bgColor,
+                            ),
+                            child: Row(
+                              children: [
+                                Image.asset('assets/ic_profile.png'),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  state.user.username,
+                                  style: blueTextStyle.copyWith(
+                                    fontSize: 16,
+                                    fontWeight: medium,
+                                  ),
+                                ),
+                                const Spacer(),
+                                const Icon(
+                                  Icons.navigate_next_rounded,
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            width: 350,
+                            height: 40,
+                            padding: const EdgeInsets.only(
+                              top: 5,
+                              bottom: 5,
+                              right: 16,
+                              left: 16,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: bgColor,
+                            ),
+                            child: Row(
+                              children: [
+                                Image.asset('assets/ic_email.png'),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  state.user.email,
+                                  style: blueTextStyle.copyWith(
+                                    fontSize: 16,
+                                    fontWeight: medium,
+                                  ),
+                                ),
+                                const Spacer(),
+                                const Icon(
+                                  Icons.navigate_next_rounded,
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            width: 350,
+                            height: 40,
+                            padding: const EdgeInsets.only(
+                              top: 5,
+                              bottom: 5,
+                              right: 16,
+                              left: 16,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: bgColor,
+                            ),
+                            child: Row(
+                              children: [
+                                Image.asset('assets/ic_lock.png'),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  'Change Password',
+                                  style: blueTextStyle.copyWith(
+                                    fontSize: 16,
+                                    fontWeight: medium,
+                                  ),
+                                ),
+                                const Spacer(),
+                                const Icon(
+                                  Icons.navigate_next_rounded,
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 21,
+                          ),
+                          Text(
+                            "Other",
+                            style: whiteTextStyle.copyWith(
+                              fontSize: 16,
+                              fontWeight: semiBold,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            width: 350,
+                            height: 40,
+                            padding: const EdgeInsets.only(
+                              top: 5,
+                              bottom: 5,
+                              right: 16,
+                              left: 16,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: bgColor,
+                            ),
+                            child: Row(
+                              children: [
+                                Image.asset('assets/order.png'),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  'Order',
+                                  style: blueTextStyle.copyWith(
+                                    fontSize: 16,
+                                    fontWeight: medium,
+                                  ),
+                                ),
+                                const Spacer(),
+                                const Icon(
+                                  Icons.navigate_next_rounded,
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            width: 350,
+                            height: 40,
+                            padding: const EdgeInsets.only(
+                              top: 5,
+                              bottom: 5,
+                              right: 16,
+                              left: 16,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: bgColor,
+                            ),
+                            child: Row(
+                              children: [
+                                Image.asset('assets/ic_help.png'),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  'Help',
+                                  style: blueTextStyle.copyWith(
+                                    fontSize: 16,
+                                    fontWeight: medium,
+                                  ),
+                                ),
+                                const Spacer(),
+                                const Icon(
+                                  Icons.navigate_next_rounded,
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          BlocConsumer<AuthCubit, AuthState>(
+                            listener: (context, state) {
+                              if (state is AuthFailed) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    backgroundColor: blueColor,
+                                    content: Text(state.error),
+                                  ),
+                                );
+                              } else if (state is AuthInitial) {
+                                context.read<PageCubit>().setPage(1);
+                                Navigator.pushNamedAndRemoveUntil(
+                                    context, '/sign-in', (route) => false);
+                              }
+                            },
+                            builder: (context, state) {
+                              if (state is AuthLoading) {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
+                              return GestureDetector(
+                                onTap: () {
+                                  context.read<AuthCubit>().signOut();
+                                },
+                                child: Container(
+                                  width: 350,
+                                  height: 40,
+                                  padding: const EdgeInsets.only(
+                                    top: 5,
+                                    bottom: 5,
+                                    right: 16,
+                                    left: 16,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: bgColor,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Image.asset('assets/ic_logout.png'),
+                                      const SizedBox(
+                                        width: 8,
+                                      ),
+                                      Text(
+                                        'Log Out Account',
+                                        style: blueTextStyle.copyWith(
+                                          fontSize: 16,
+                                          fontWeight: medium,
+                                        ),
+                                      ),
+                                      const Spacer(),
+                                      const Icon(
+                                        Icons.navigate_next_rounded,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          const SizedBox(
+                            height: 100,
                           ),
                         ],
                       ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      width: 350,
-                      height: 40,
-                      padding: const EdgeInsets.only(
-                        top: 5,
-                        bottom: 5,
-                        right: 16,
-                        left: 16,
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: bgColor,
-                      ),
-                      child: Row(
-                        children: [
-                          Image.asset('assets/ic_logout.png'),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          Text(
-                            'Log Out Account',
-                            style: blueTextStyle.copyWith(
-                              fontSize: 16,
-                              fontWeight: medium,
-                            ),
-                          ),
-                          const Spacer(),
-                          const Icon(
-                            Icons.navigate_next_rounded,
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 100,
                     ),
                   ],
                 ),
-              ),
-            ],
-          ),
+              );
+            } else {
+              return const SizedBox();
+            }
+          },
         ),
       ),
     );
